@@ -1,7 +1,7 @@
 version: '3.4'
 services:
-    web1: 
-      image: eboraas/apache-php
+    romantic_goodall: 
+      image: palash315/nodejspractical
       build:
         context: .
         dockerfile: Dockerfile
@@ -10,7 +10,6 @@ services:
       - "8001:80"
       networks:
       - myNetwork
-
       healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:8001/"]
         interval: 30s

@@ -1,0 +1,43 @@
+version: '3.4'
+services:
+    web1: 
+      image: eboraas/apache-php
+      build:
+        context: .
+        dockerfile: Dockerfile
+      restart: unless-stopped
+      ports:
+      - "8001:80"
+      networks:
+      - myNetwork
+
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8001/"]
+        interval: 30s
+        timeout: 10s
+        retries: 3
+    restart: on-failure
+
+      
+    dazzling_nash:
+      image: palash315/task5.1p
+      build:
+        context: .
+        dockerfile: Dockerfile
+      restart: unless-stopped
+      ports:
+      - "3000:3000"
+      networks:
+      - myNetwork
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+        interval: 30s
+        timeout: 10s
+        retries: 3
+    restart: on-failure
+    
+    networks:
+      myNetwork:
+        driver: custom-driver-1
+  
+
